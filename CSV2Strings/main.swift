@@ -92,7 +92,6 @@ func csvToStrings() {
                     to = value.index(value.startIndex, offsetBy: tempArr[i+1].range.lowerBound)
                 }
                 var tempvalue = String(value[from ..< to]).replacingOccurrences(of: "\"\"", with: "\"")
-                tempvalue = tempvalue.replacingOccurrences(of: "\"", with: "")
                 if tempvalue.count == 0 {
                     continue
                 }
