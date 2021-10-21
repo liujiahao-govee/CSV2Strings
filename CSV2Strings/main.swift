@@ -8,16 +8,16 @@
 import Foundation
 
 // 导出路径
-let exportPath = "/Users/liujiahao/Desktop/strings"
+let exportPath = "/Users/liujiahao/Documents/GitHub/GoveeHomeIos/BaseResource/BaseResource/Assets/LocalString"
 // csv文件目录
 let inputPath = "/Users/liujiahao/Desktop/iOS多语言.csv"
 
 
-let fileName = "Localizable.strings"
+let fileName = "GVLocalizable.strings"
 let fileManager = FileManager.default
 
 // strings 转 csv
-//stringsToCsv()
+// stringsToCsv()
 
 // csv 转 strings
 csvToStrings()
@@ -31,7 +31,12 @@ func csvToStrings() {
     var writeStrArr = [String]()
     var lproj = [String]()
     var keyDict = [String: Any]()
+    
+    /// 重复的key
     var duplicatedKeys = [String]()
+    
+    /// 非法的key
+//    var invalidKeys = [String]()
     
     let pattern = ",(?=([^\"]*\"[^\"]*\")*[^\"]*$)" // 分隔逗号的正则
     //2. 创建这正则表达式对象
@@ -76,6 +81,10 @@ func csvToStrings() {
         
         if key.hasSuffix("\"") {
             key.removeLast()
+        }
+        
+        if key.isEmpty || key == "Key" {
+            continue
         }
         
         if keyDict.updateValue("", forKey: key) != nil {
